@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siti Famosi Colorati</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            /* Sfondo sfumato colorato */
+            background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh; /* Assicura che lo sfondo copra tutta l'altezza */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Il contenitore principale bianco semi-trasparente */
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Bianco al 90% di opacità */
+            padding: 40px;
+            border-radius: 20px; /* Angoli arrotondati */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Ombreggiatura morbida */
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none; /* Rimuove i punti elenco standard */
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 25px;
+            display: flex; /* Allinea l'emoji e il testo orizzontalmente */
+            align-items: flex-start; /* Allinea in alto nel caso di descrizioni lunghe */
+        }
+
+        /* Stile per le emoticon giganti */
+        .emoji-bullet {
+            font-size: 3em; /* Dimensione molto più grande del testo */
+            margin-right: 20px;
+            line-height: 1; /* Mantiene l'emoji compatta verticalmente */
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1)); /* Leggera ombra sull'emoji */
+        }
+
+        .text-content {
+            flex: 1; /* Occupa lo spazio rimanente */
+        }
+
+        .text-content strong a {
+            font-size: 1.2em;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .text-content strong a:hover {
+            text-decoration: underline;
+        }
+        
+        .text-content p {
+            margin-top: 5px;
+            color: #555;
+        }
+
+        .cookie-notice {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            font-size: 0.85em;
+            color: #666;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Esplora il Web 🚀</h1>
+
+        <ul>
+            <li>
+                <span class="emoji-bullet">🔍</span>
+                <div class="text-content">
+                    <strong><a href="https://www.google.com" target="_blank">Google</a></strong>
+                    <p>Il motore di ricerca più utilizzato al mondo per trovare informazioni online.</p>
+                </div>
+            </li>
+            <li>
+                <span class="emoji-bullet">📚</span>
+                <div class="text-content">
+                    <strong><a href="https://it.wikipedia.org" target="_blank">Wikipedia</a></strong>
+                    <p>Un'enciclopedia libera e collaborativa scritta dagli utenti di tutto il mondo.</p>
+                </div>
+            </li>
+            <li>
+                <span class="emoji-bullet">📺</span>
+                <div class="text-content">
+                    <strong><a href="https://www.youtube.com" target="_blank">YouTube</a></strong>
+                    <p>La principale piattaforma web per la condivisione e visualizzazione di video.</p>
+                </div>
+            </li>
+        </ul>
+
+        <div class="cookie-notice">
+            <strong>ℹ️ Nota di trasparenza:</strong> Questo sito è statico, ha scopo puramente informativo e non fa uso di cookies o tecnologie di tracciamento.
+        </div>
+    </div>
+
+</body>
+</html>
