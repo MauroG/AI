@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Grandezze Elettriche e Leggi Fondamentali (Modulo A1)</title>
+
+    <!-- Aggiunto manualmente [MG] -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+
+    <!-- Caricamento di Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configurazione del font Inter e stile base -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .quiz-container {
+            max-width: 700px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        .option-button {
+            transition: all 0.15s ease;
+            /* Forza l'allineamento del testo a sinistra, utile per le formule */
+            text-align: left !important; 
+        }
+        .option-button:hover:not(.disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="quiz-app" class="quiz-container">
+        <h1 class="text-3xl font-bold text-center text-indigo-700 mb-6">
+            Quiz: Grandezze Elettriche e Leggi Fondamentali
+        </h1>
+        <div id="quiz-content">
+            <!-- Il contenuto del quiz (domanda, opzioni, risultati) sarà iniettato qui -->
+            <div id="progress-bar" class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+                <div id="progress" class="bg-indigo-500 h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <div id="question-area">
+                <p class="text-lg text-gray-600 mb-4">Caricamento...</p>
+            </div>
+            
+            <div id="controls" class="mt-8 flex justify-between items-center">
+                <p id="feedback" class="text-lg font-medium text-gray-700"></p>
+                <button id="next-button" disabled
+                        class="px-6 py-3 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-600 disabled:bg-indigo-300 disabled:cursor-not-allowed transition duration-150">
+                    Prossima Domanda
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array di oggetti per definire le domande del quiz (inclusa la LaTeX per le formule)
+        const quizData = [
+            {
+                question: "Qual è l'unità di misura della corrente elettrica nel Sistema Internazionale (SI)?",
+                options: [
+                    { text: "Volt (V)", isCorrect: false, rationale: "Il Volt è l'unità di misura della tensione o differenza di potenziale elettrico." },
+                    { text: "Ohm ($\\Omega$)", isCorrect: false, rationale: "L'Ohm è l'unità di misura della resistenza elettrica." },
+                    { text: "Ampere (A)", isCorrect: true, rationale: "L'Ampere è definito come l'unità di misura della corrente elettrica (carica che fluisce per unità di tempo)." },
+                    { text: "Watt (W)", isCorrect: false, rationale: "Il Watt è l'unità di misura della potenza elettrica." }
+                ],
+                hint: "Ricorda la definizione di Ampere nel SI."
+            },
+            {
+                question: "Quale relazione esprime analiticamente la Prima Legge di Ohm (in corrente continua)?",
+                options: [
+                    { text: "$P = V \\cdot I$", isCorrect: false, rationale: "Questa è la formula della potenza elettrica." },
+                    { text: "$V = R \\cdot I$", isCorrect: true, rationale: "La Prima Legge di Ohm stabilisce che la tensione ($V$) ai capi di un resistore è direttamente proporzionale alla corrente ($I$) che lo attraversa, con la resistenza ($R$) come costante di proporzionalità." },
+                    { text: "$Q = I \\cdot t$", isCorrect: false, rationale: "Questa formula definisce la carica elettrica ($Q$) in funzione di corrente e tempo." },
+                    { text: "$R = \\rho \\cdot \\frac{l}{S}$", isCorrect: false, rationale: "Questa è la Seconda Legge di Ohm, che definisce la resistenza in base alle proprietà fisiche del conduttore." }
+                ],
+                hint: "La legge collega tensione, resistenza e corrente nel bipolo resistore."
+            },
+            {
+                question: "Cosa rappresenta la tensione elettrica ($V$) tra due punti di un circuito?",
+                options: [
+                    { text: "La quantità totale di carica nel circuito.", isCorrect: false, rationale: "La quantità di carica è misurata in Coulomb ($C$)." },
+                    { text: "L'opposizione del conduttore al passaggio della corrente.", isCorrect: false, rationale: "Questa è la definizione di resistenza elettrica." },
+                    { text: "La potenza dissipata per unità di tempo.", isCorrect: false, rationale: "Questa è la definizione di potenza elettrica." },
+                    { text: "La differenza di potenziale elettrico (d.d.p.) / Energia per unità di carica.", isCorrect: true, rationale: "La tensione elettrica indica l'energia fornita (o dissipata) per unità di carica ($V = J/C$). Rappresenta la d.d.p. tra due punti." }
+                ],
+                hint: "Pensa alla sua definizione energetica ($V = W/Q$)."
+            },
+            {
+                question: "Qual è l'espressione della potenza elettrica ($P$) persa per effetto Joule in un conduttore, in funzione della sola resistenza ($R$) e corrente ($I$)?",
+                options: [
+                    { text: "$P = V / I$", isCorrect: false, rationale: "Questa è la formula per trovare la resistenza ($R$) con Ohm." },
+                    { text: "$P = R \\cdot I^2$", isCorrect: true, rationale: "Utilizzando $P = V \\cdot I$ e sostituendo $V = R \\cdot I$ (Legge di Ohm), si ottiene $P = (R \\cdot I) \\cdot I = R \\cdot I^2$." },
+                    { text: "$P = R^2 \\cdot I$", isCorrect: false, rationale: "Questa formula non corrisponde alla definizione di potenza elettrica." },
+                    { text: "$P = V \\cdot R$", isCorrect: false, rationale: "La potenza è il prodotto tra tensione e corrente, non tra tensione e resistenza." }
+                ],
+                hint: "Combina la formula della potenza ($P=VI$) con la Legge di Ohm ($V=RI$)."
+            },
+            {
+                question: "Qual è la formula per la resistenza equivalente ($R_{eq}$) di due resistori ($R_1$ e $R_2$) collegati in parallelo?",
+                options: [
+                    { text: "$R_{eq} = R_1 + R_2$", isCorrect: false, rationale: "Questa è la formula per la resistenza equivalente di due resistori in serie." },
+                    { text: "$R_{eq} = R_1 / R_2$", isCorrect: false, rationale: "Questa non è una formula standard per il collegamento in parallelo." },
+                    { text: "$R_{eq} = \\frac{R_1 \\cdot R_2}{R_1 + R_2}$", isCorrect: true, rationale: "La resistenza equivalente in parallelo si calcola come l'inverso della somma degli inversi delle singole resistenze, che per due resistori si semplifica in $\\frac{R_1 R_2}{R_1 + R_2}$." },
+                    { text: "$R_{eq} = \\sqrt{R_1 \\cdot R_2}$", isCorrect: false, rationale: "Questa formula è usata in contesti specifici ma non per la resistenza equivalente in parallelo." }
+                ],
+                hint: "Ricorda che in parallelo, la resistenza equivalente è minore della più piccola resistenza."
+            },
+            {
+                question: "La resistenza elettrica ($R$) di un conduttore è direttamente proporzionale alla sua lunghezza ($l$) e inversamente proporzionale alla sua sezione ($S$). Qual è la costante di proporzionalità in questa relazione?",
+                options: [
+                    { text: "La conduttanza ($\\sigma$)", isCorrect: false, rationale: "La conduttanza è l'inverso della resistenza ($G=1/R$)." },
+                    { text: "La tensione ($V$)", isCorrect: false, rationale: "La tensione non è una proprietà fisica del materiale." },
+                    { text: "La resistività ($\\rho$)", isCorrect: true, rationale: "La resistività ($\\rho$) è una proprietà intrinseca del materiale che esprime la sua capacità di opporsi al flusso di corrente (Seconda Legge di Ohm: $R = \\rho \\cdot l/S$)." },
+                    { text: "La densità di corrente ($J$)", isCorrect: false, rationale: "La densità di corrente è una grandezza di flusso ($J=I/S$)." }
+                ],
+                hint: "Questa costante dipende solo dal materiale e dalla temperatura."
+            },
+            {
+                question: "Se in un circuito la tensione ($V$) viene raddoppiata e la resistenza ($R$) rimane costante, cosa succede alla corrente ($I$) secondo la Legge di Ohm?",
+                options: [
+                    { text: "Diminuisce della metà.", isCorrect: false, rationale: "La corrente è direttamente proporzionale alla tensione ($I=V/R$)." },
+                    { text: "Raddoppia.", isCorrect: true, rationale: "Poiché $I = V/R$, se $V$ raddoppia e $R$ resta costante, anche la corrente ($I$) raddoppia." },
+                    { text: "Quadruplica.", isCorrect: false, rationale: "Questo accadrebbe se anche la resistenza venisse ridotta della metà." },
+                    { text: "Rimane invariata.", isCorrect: false, rationale: "La corrente è direttamente dipendente dalla tensione." }
+                ],
+                hint: "Applica la proporzionalità diretta tra $V$ e $I$."
+            },
+            {
+                question: "Qual è l'unità di misura della resistenza elettrica?",
+                options: [
+                    { text: "Coulomb (C)", isCorrect: false, rationale: "Il Coulomb è l'unità di misura della carica elettrica." },
+                    { text: "Henry (H)", isCorrect: false, rationale: "L'Henry è l'unità di misura dell'induttanza." },
+                    { text: "Farad (F)", isCorrect: false, rationale: "Il Farad è l'unità di misura della capacità elettrica." },
+                    { text: "Ohm ($\\Omega$)", isCorrect: true, rationale: "L'Ohm ($\\Omega$) è l'unità di misura della resistenza elettrica, definita come $1 \\Omega = 1 V/1 A$." }
+                ],
+                hint: "Il suo simbolo è la lettera greca omega maiuscola."
+            },
+            {
+                question: "In un generatore di tensione, la tensione sviluppata al suo interno è detta:",
+                options: [
+                    { text: "Tensione ai morsetti.", isCorrect: false, rationale: "La tensione ai morsetti può essere diversa dalla f.e.m. a causa della resistenza interna." },
+                    { text: "Differenza di potenziale (d.d.p.).", isCorrect: false, rationale: "Questo è un termine generico per la tensione tra due punti." },
+                    { text: "Forza Elettromotrice (f.e.m.).", isCorrect: true, rationale: "La f.e.m. è la tensione generata internamente dalla sorgente, in assenza di assorbimento di corrente." },
+                    { text: "Potenza specifica.", isCorrect: false, rationale: "La potenza specifica è una grandezza non direttamente correlata alla tensione interna." }
+                ],
+                hint: "Questa grandezza è spesso abbreviata in f.e.m."
+            },
+            {
+                question: "La densità di corrente ($J$) è definita come:",
+                options: [
+                    { text: "Potenza per unità di volume.", isCorrect: false, rationale: "Questa è la densità di potenza o calore generato per unità di volume." },
+                    { text: "Corrente per unità di lunghezza del conduttore.", isCorrect: false, rationale: "La densità di corrente è sempre riferita all'area." },
+                    { text: "Corrente per unità di sezione trasversale ($J = I/S$).", isCorrect: true, rationale: "La densità di corrente misura il flusso di carica ($I$) attraverso l'area della sezione ($S$) del conduttore." },
+                    { text: "Tensione per unità di resistenza.", isCorrect: false, rationale: "Questo, per la Legge di Ohm, è la corrente ($I = V/R$)." }
+                ],
+                hint: "La sua unità di misura è l'Ampere per millimetro quadrato (A/mm$^2$) o metro quadrato (A/m$^2$)."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let quizCompleted = false;
+        let selectedOption = null; // Memorizza l'indice dell'opzione selezionata
+
+        // VARIABILI GLOBALI (non let/const per essere esposte globalmente e riassegnabili)
+        let quizContent = document.getElementById('quiz-content');
+        let questionArea = document.getElementById('question-area');
+        let nextButton = document.getElementById('next-button');
+        let feedback = document.getElementById('feedback');
+        let progress = document.getElementById('progress');
+
+
+        // Funzione per inizializzare il render LaTeX
+        function renderLatex() {
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            } else {
+                console.error("MathJax non è stato caricato correttamente.");
+            }
+        }
+
+        // Funzione per mostrare il suggerimento
+        function showHint(button) {
+            document.getElementById('hint-text').classList.remove('hidden');
+            button.classList.add('hidden');
+        }
+
+
+        // Funzione chiamata alla selezione di un'opzione
+        function selectOption(button, index) {
+            // Disabilita tutte le opzioni per prevenire ulteriori clic
+            document.querySelectorAll('.option-button').forEach(btn => {
+                btn.onclick = null;
+                btn.classList.add('disabled');
+            });
+            
+            selectedOption = index;
+            const q = quizData[currentQuestionIndex];
+            const isCorrect = q.options[index].isCorrect;
+
+            // Evidenzia la risposta selezionata
+            button.classList.remove('hover:bg-indigo-50', 'border-gray-300');
+            button.classList.add('ring-4', isCorrect ? 'ring-green-300' : 'ring-red-300');
+
+            if (isCorrect) {
+                score++;
+                feedback.innerHTML = '<span class="text-green-600 font-bold">Corretto!</span>';
+            } else {
+                feedback.innerHTML = '<span class="text-red-600 font-bold">Sbagliato.</span>';
+                // Trova e evidenzia la risposta corretta
+                q.options.forEach((option, idx) => {
+                    if (option.isCorrect) {
+                        const correctButton = document.querySelector(`[data-index="${idx}"]`);
+                        correctButton.classList.remove('bg-white', 'border-gray-300');
+                        correctButton.classList.add('bg-green-100', 'border-green-400');
+                    }
+                });
+            }
+            
+            // Mostra il rationale sotto la risposta selezionata
+            const rationaleText = document.createElement('p');
+            rationaleText.className = 'text-sm mt-2 p-3 rounded-lg ' + (isCorrect ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700');
+            rationaleText.innerHTML = `<strong>Spiegazione:</strong> ${q.options[index].rationale}`;
+            button.parentNode.insertBefore(rationaleText, button.nextSibling);
+
+            // Abilita il pulsante "Prossima Domanda"
+            nextButton.disabled = false;
+            if (currentQuestionIndex === quizData.length - 1) {
+                nextButton.textContent = 'Visualizza Risultati';
+            }
+            
+            // Nascondi il pulsante suggerimento
+            document.getElementById('hint-text').classList.remove('hidden');
+            const hintBtn = document.querySelector('#hint-text').previousElementSibling;
+            if(hintBtn && hintBtn.tagName === 'BUTTON') hintBtn.classList.add('hidden');
+
+            // Esegui il render LaTeX per includere il rationale
+            renderLatex();
+        }
+
+        // Funzione per disegnare la domanda corrente
+        function renderQuestion() {
+            if (quizCompleted) return;
+
+            const q = quizData[currentQuestionIndex];
+            
+            // Aggiorna la barra di progresso
+            // Il progresso si basa sul numero di domande completate
+            const progressPercentage = ((currentQuestionIndex) / quizData.length) * 100;
+            progress.style.width = `${progressPercentage}%`;
+            
+            // Resetta l'interfaccia
+            questionArea.innerHTML = '';
+            feedback.textContent = '';
+            nextButton.disabled = true;
+            nextButton.textContent = 'Prossima Domanda';
+            selectedOption = null;
+
+            const questionText = document.createElement('p');
+            questionText.className = 'text-xl font-semibold text-gray-800 mb-6';
+            questionText.innerHTML = `Domanda ${currentQuestionIndex + 1} di ${quizData.length}: ${q.question}`;
+            questionArea.appendChild(questionText);
+
+            const optionsContainer = document.createElement('div');
+            optionsContainer.className = 'space-y-4';
+
+            q.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.innerHTML = option.text; 
+                button.className = 'option-button w-full text-left p-4 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-indigo-50 transition duration-150';
+                button.setAttribute('data-index', index);
+                button.onclick = () => selectOption(button, index);
+                optionsContainer.appendChild(button);
+            });
+
+            questionArea.appendChild(optionsContainer);
+            
+            // Aggiunge l'hint nascosto inizialmente
+            const hintContainer = document.createElement('div');
+            hintContainer.className = 'mt-4 pt-4 border-t border-gray-200';
+            
+            const hintButton = document.createElement('button');
+            hintButton.className = 'text-sm text-indigo-500 hover:text-indigo-700 font-medium';
+            hintButton.textContent = 'Mostra Suggerimento';
+            hintButton.onclick = function() { showHint(this); }; // Listener diretto
+
+            const hintText = document.createElement('p');
+            hintText.id = 'hint-text';
+            hintText.className = 'text-sm text-gray-500 mt-2 hidden';
+            hintText.textContent = q.hint;
+
+            hintContainer.appendChild(hintButton);
+            hintContainer.appendChild(hintText);
+            questionArea.appendChild(hintContainer);
+
+            // Esegui il render LaTeX DOPO aver aggiunto gli elementi al DOM
+            renderLatex();
+        }
+
+
+        // Funzione per passare alla domanda successiva o terminare il quiz
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        // Funzione per visualizzare i risultati
+        function endQuiz() {
+            quizCompleted = true;
+            // Aggiorna la barra di progresso al 100%
+            progress.style.width = '100%';
+
+            // Crea la struttura principale dei risultati
+            const resultsHtml = `
+                <h2 class="text-2xl font-bold text-center text-indigo-700 mb-6">Quiz Completato!</h2>
+                <div class="text-center p-8 bg-indigo-50 rounded-xl shadow-inner">
+                    <p class="text-xl text-gray-700 mb-4">Il tuo punteggio finale è:</p>
+                    <p class="text-5xl font-extrabold text-indigo-600">${score} / ${quizData.length}</p>
+                    <p class="text-lg text-gray-600 mt-4">${getFeedbackMessage(score, quizData.length)}</p>
+                </div>
+                <div id="reset-container" class="mt-8 text-center">
+                </div>
+            `;
+            quizContent.innerHTML = resultsHtml;
+            
+            // CREAZIONE DEL PULSANTE RESET CON LISTENER DIRETTO (FIX)
+            const resetButton = document.createElement('button');
+            resetButton.textContent = 'Riprova Quiz';
+            resetButton.className = 'px-8 py-4 bg-green-500 text-white font-semibold rounded-lg shadow-lg hover:bg-green-600 transition duration-150 transform hover:scale-105';
+            resetButton.onclick = resetQuiz; // Listener diretto
+
+            document.getElementById('reset-container').appendChild(resetButton);
+        }
+
+        // Messaggio di feedback in base al punteggio
+        function getFeedbackMessage(score, total) {
+            const percentage = (score / total) * 100;
+            if (percentage === 100) return "Eccellente! Conoscenza perfetta delle Grandezze Elettriche e Leggi Fondamentali.";
+            if (percentage >= 80) return "Ottimo lavoro! La tua preparazione è solida.";
+            if (percentage >= 60) return "Buono! Alcuni concetti chiave sono da rivedere.";
+            return "Hai bisogno di ripassare! Rileggi il Modulo A1 e riprova.";
+        }
+
+        // Funzione per resettare il quiz - CORRETTA
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizCompleted = false;
+            
+            // Struttura HTML da reinserire
+            const initialHtml = `
+                <div id="progress-bar" class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+                    <div id="progress" class="bg-indigo-500 h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
+
+                <div id="question-area"></div>
+                
+                <div id="controls" class="mt-8 flex justify-between items-center">
+                    <p id="feedback" class="text-lg font-medium text-gray-700"></p>
+                    <button id="next-button" disabled
+                            class="px-6 py-3 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-600 disabled:bg-indigo-300 disabled:cursor-not-allowed transition duration-150">
+                        Prossima Domanda
+                    </button>
+                </div>
+            `;
+            quizContent.innerHTML = initialHtml;
+            
+            // Passo fondamentale: RI-ASSEGNARE i riferimenti DOM alle variabili globali
+            // In caso contrario, nextButton, questionArea, ecc. punterebbero ancora a elementi rimossi dal DOM.
+            questionArea = document.getElementById('question-area');
+            nextButton = document.getElementById('next-button');
+            feedback = document.getElementById('feedback');
+            progress = document.getElementById('progress');
+            
+            // Riattacca il listener per il pulsante next
+            nextButton.addEventListener('click', nextQuestion);
+
+            // Chiama renderQuestion() per disegnare la prima domanda
+            renderQuestion();
+        }
+
+        // Inizializzazione della libreria MathJax per il rendering LaTeX
+        const mathjaxScript = document.createElement('script');
+        mathjaxScript.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+        mathjaxScript.async = true;
+        document.head.appendChild(mathjaxScript);
+        
+        // Attacca il listener per il pulsante "Prossima Domanda" statico
+        nextButton.addEventListener('click', nextQuestion);
+        
+        // Attendi che MathJax sia pronto prima di renderizzare la prima domanda
+        mathjaxScript.onload = () => {
+            renderQuestion();
+        };
+
+    </script>
+</body>
+</html>
