@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabelline 2-10 - Schema Verticale</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            options: {
+                enableMenu: true,
+                menuSettings: { zoom: 'Click' }
+            }
+        };
+    </script>
+    <style>
+        @page {
+            size: landscape;
+            margin: 1cm;
+        }
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 10px; /* Compattamento font */
+        }
+        .page {
+            width: 100%;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .header-fields {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 5px;
+        }
+        .header-field-label { font-weight: bold; }
+        .header-field-line { border-bottom: 1px solid #000; min-width: 100px; display: inline-block; }
+
+        /* Griglie per file */
+        .row-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            gap: 5px;
+        }
+
+        .gen-box-solid {
+            border: 1px solid #000;
+            padding: 5px;
+            flex: 1;
+            background: #fff;
+        }
+
+        .gen-bold { font-weight: bold; margin-bottom: 5px; display: block; }
+        .gen-text-center { text-align: center; }
+
+        .gen-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .gen-table td {
+            border: 1px solid #eee;
+            padding: 1px;
+            height: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <header class="header">
+        <div class="header-fields">
+            <div class="header-field"><span class="header-field-label">Nome:</span> <span class="header-field-line">&nbsp;</span></div>
+            <div class="header-field"><span class="header-field-label">Data:</span> <span class="header-field-line">&nbsp;</span></div>
+        </div>
+        <h1 style="margin: 5px 0;">Le tabelline dal 2 al 10</h1>
+    </header>
+
+    <div class="row-container">
+        <div class="gen-box-solid">
+            <span class="gen-bold gen-text-center">Tab del 2</span>
+            <table class="gen-table">
+                <tbody>
+                    <tr><td>●</td><td>●</td></tr><tr><td>2</td><td>12</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>4</td><td>14</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>6</td><td>16</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>8</td><td>18</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>10</td><td>20</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="gen-box-solid">
+            <span class="gen-bold gen-text-center">Tab del 3</span>
+            <table class="gen-table">
+                <tbody>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>3</td><td>18</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>6</td><td>21</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>9</td><td>24</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>12</td><td>27</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>15</td><td>30</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="gen-box-solid">
+            <span class="gen-bold gen-text-center">Tab del 4</span>
+            <table class="gen-table">
+                <tbody>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>4</td><td>24</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>8</td><td>28</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>12</td><td>32</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>16</td><td>36</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>20</td><td>40</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="gen-box-solid">
+            <span class="gen-bold gen-text-center">Tab del 5</span>
+            <table class="gen-table">
+                <tbody>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>5</td><td>30</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>10</td><td>35</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>15</td><td>40</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>20</td><td>45</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>25</td><td>50</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="gen-box-solid">
+            <span class="gen-bold gen-text-center">Tab del 6</span>
+            <table class="gen-table">
+                <tbody>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>6</td><td>36</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>12</td><td>42</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>18</td><td>48</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>24</td><td>54</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>30</td><td>60</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row-container">
+        <div class="gen-box-solid">
+            <span class="gen-bold gen-text-center">Tab del 7</span>
+            <table class="gen-table">
+                <tbody id="tab7">
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>7</td><td>42</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>14</td><td>49</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>21</td><td>56</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>28</td><td>63</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>35</td><td>70</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="gen-box-solid">
+            <span class="gen-bold gen-text-center">Tab del 8</span>
+            <table class="gen-table">
+                <tbody>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>8</td><td>48</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>16</td><td>56</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>24</td><td>64</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>32</td><td>72</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>40</td><td>80</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="gen-box-solid">
+            <span class="gen-bold gen-text-center">Tab del 9</span>
+            <table class="gen-table">
+                <tbody>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>9</td><td>54</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>18</td><td>63</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>27</td><td>72</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>36</td><td>81</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>45</td><td>90</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="gen-box-solid">
+            <span class="gen-bold gen-text-center">Tab del 10</span>
+            <table class="gen-table">
+                <tbody>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>10</td><td>60</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>20</td><td>70</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>30</td><td>80</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>40</td><td>90</td></tr>
+                    <tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>●</td><td>●</td></tr><tr><td>50</td><td>100</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
